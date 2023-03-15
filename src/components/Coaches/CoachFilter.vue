@@ -1,42 +1,42 @@
 <template>
-    <base-card>
+  <base-card>
+  <h2>Filter</h2>
     <span class="filter">
-        <input type="checkbox" id="frontend" checked @change="setFilter">
-        <label for="frontend">Frontend</label>
+      <input type="checkbox" id="frontend" checked @change="setFilters"/>
+      <label for="frontend">Frontend</label>
     </span>
     <span class="filter">
-        <input type="checkbox" id="backend" checked @change="setFilter">
-        <label for="backend">Backend</label>
+      <input type="checkbox" id="backend" checked @change="setFilters"/>
+      <label for="backend">Backend</label>
     </span>
     <span class="filter">
-        <input type="checkbox" id="career" checked @change="setFilter">
-        <label for="career">Career</label>
+      <input type="checkbox" id="career" checked @change="setFilters"/>
+      <label for="career">Career</label>
     </span>
-    </base-card>
+  </base-card>
 </template>
 <script>
-
 export default {
     emits:['change-filter'],
     data(){
-        return {
-            filters:{
+        return{
+            activeFilters:{
                 frontend:true,
                 backend:true,
-                career:true,
+                career:true
             }
         }
     },
     methods:{
-        setFilter(event){
+        setFilters(event){
             const input = event.target.id;
             const isActive=event.target.checked;
-            const updatedFilter={
-                ...this.filters,
+            const updateFilter={
+                ...this.activeFilters,
                 [input]:isActive
             }
-            this.filters=updatedFilter;
-            this.$emit('change-filter',updatedFilter);
+            this.activeFilters=updateFilter;
+            this.$emit('change-filter',updateFilter)
         }
     }
 }
