@@ -3,7 +3,7 @@ import CoachesList from "./pages/Coaches/CoachesList.vue";
 import CoachDetails from "./pages/Coaches/CoachDetails.vue";
 import CoachRegister from "./pages/Coaches/CoachRegister.vue";
 import ContactCoach from "./pages/Request/ContactCoach.vue";
-import RequestRegister from "./pages/Request/RequestRegister.vue";
+import RequestRecieved from "./pages/Request/RequestRecieved.vue";
 import NotFound from "./pages/NotFound.vue";
 
 const router = createRouter({
@@ -17,7 +17,7 @@ const router = createRouter({
       props: true,
       children: [{ path: "contact", component: ContactCoach }],
     },
-    { path: "/request", component: RequestRegister },
+    { path: "/request", component: RequestRecieved },
     { path: "/register", component: CoachRegister },
     { path: "/:notFound(.*)", component: NotFound },
   ],

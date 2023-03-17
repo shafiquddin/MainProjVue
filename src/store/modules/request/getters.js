@@ -1,5 +1,8 @@
 export default {
-  request(state){
+  request(state) {
     return state.request;
-  }
+  },
+  hasRequest(state) {
+    return state.request && state.request.length > 0;
+  },
 };
