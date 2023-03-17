@@ -63,10 +63,16 @@ export default {
       return this.$store.getters["coach/hasCoaches"];
     },
   },
+  created(){
+    this.loadCoaches();
+  },
   methods: {
     setFilter(updateFilter) {
       this.activeFilter = updateFilter;
     },
+    loadCoaches(){
+      this.$store.dispatch('coach/loadCoaches');
+    }
   },
 };
 </script>
