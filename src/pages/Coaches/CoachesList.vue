@@ -1,4 +1,5 @@
 <template>
+  <div>
     <base-dialog :show="!!error" title="An error Occured" @close="handleError">
     <p>{{ error }}</p>
   </base-dialog>
@@ -28,6 +29,7 @@
       <h2 v-else>No Coaches Found</h2>
     </base-card>
   </section>
+</div>
 </template>
 <script>
 import CoachItems from "../../components/Coaches/CoachItems.vue";

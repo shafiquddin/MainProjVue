@@ -1,4 +1,5 @@
 <template>
+  <div>
     <base-dialog :show="!!error" title="An error Occured!" @close="handleError">
     <p>{{ error }}</p>
 </base-dialog>
@@ -19,6 +20,7 @@
     </ul>
     <h3 v-else>You Haven't Recieved any request so far!</h3>
   </base-card>
+</div>
 </template>
 <script>
 import RequestItem from "@/components/Request/RequestItem.vue";
