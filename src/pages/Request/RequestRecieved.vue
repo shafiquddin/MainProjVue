@@ -1,29 +1,63 @@
 <template>
-    <base-card>
+    <base-dialog :show="!!error" title="An error Occured!" @close="handleError">
+    <p>{{ error }}</p>
+</base-dialog>
+  <base-card>
     <header>
-        <h2>Request Recieved</h2>
+      <h2>Request Recieved</h2>
     </header>
-    <ul v-if="hasRequest">
-        <request-item v-for="req in requestRecieved" :key="req.id" :email="req.userEmail" :message="req.message"></request-item>
+    <div v-if="isLoading">
+        <base-spinner></base-spinner>
+    </div>
+    <ul v-else-if="hasRequest">
+      <request-item
+        v-for="req in requestRecieved"
+        :key="req.id"
+        :email="req.userEmail"
+        :message="req.message"
+      ></request-item>
     </ul>
     <h3 v-else>You Haven't Recieved any request so far!</h3>
-   </base-card>
+  </base-card>
 </template>
 <script>
-import RequestItem from '@/components/Request/RequestItem.vue';
+import RequestItem from "@/components/Request/RequestItem.vue";
 export default {
-    computed:{
-        requestRecieved(){
-            return this.$store.getters['request/request'];
-        },
-        hasRequest(){
-            return this.$store.getters['request/hasRequest'];
+  data() {
+    return {
+      isLoading: false,
+      error: null,
+    };
+  },
+  created() {
+    this.loadRequest();
+  },
+  methods:{
+   async loadRequest(){
+        this.isLoading=true;
+        try{
+        await this.$store.dispatch('request/fetchRequest');
+        }catch(error){
+            this.error=error.message || 'failed to fetch';
         }
+        this.isLoading=false;
     },
-    components:{
-        RequestItem,
+    handleError(){
+        this.error=null;
     }
-}
+  },
+  components: {
+    RequestItem,
+  },
+  computed: {
+    requestRecieved() {
+      return this.$store.getters["request/request"];
+    },
+    hasRequest() {
+      return this.$store.getters["request/hasRequest"];
+    },
+  },
+};
 </script>
 <style scoped>
 header {
