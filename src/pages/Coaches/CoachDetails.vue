@@ -10,7 +10,7 @@
     <base-card>
       <header>
         <h2>Interested? Reach Out Now</h2>
-        <base-button link :to="contactLink">Contact</base-button>
+        <base-button link :to="contactLink" v-if="!contactVisiblity">Contact</base-button>
       </header>
       <router-view></router-view>
     </base-card>
@@ -48,8 +48,11 @@ export default {
     rate(){
         return this.selectedCoach.hourlyRate;
     },
-    contactLink(){
-        return this.$route.path+'/'+this.id;
+    contactLink() {
+      return this.$route.path+'/contact';
+    },
+    contactVisiblity(){
+      return this.$route.path.includes('/contact');
     },
     areas(){
         return this.selectedCoach.areas;
